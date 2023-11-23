@@ -13,7 +13,7 @@ router.post('/create', questionsController.createQuestions);
 router.post('/:id/options/create', questionsController.addOptions);
 
 // Route to delete a question by question ID 
-router.delete('/:id/delete', questionsController.deleteQuestions);
+router.get('/:id/delete', questionsController.deleteQuestions);
 
 // Route to view a question by question ID 
 router.get('/:id', questionsController.viewQuestions);
