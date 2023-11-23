@@ -3,6 +3,7 @@ import Question from '../model/questions.model.js';
 import Option from '../model/options.model.js';
 
 export default class QuestionsController {
+  // Create a new question
   async createQuestions(req, res) {
     try {
       const { title } = req.body;
@@ -19,6 +20,7 @@ export default class QuestionsController {
     }
   }
 
+  // Add options to a question
   async addOptions(req, res) {
     try {
       const questionId = req.params.id;
@@ -29,12 +31,14 @@ export default class QuestionsController {
 
       const { text } = req.body;
 
+      // Create a new option
       const option = new Option({
         text: text,
         votes: 0,
         link_to_vote: `http://localhost:8000/options/${questionId}/add_vote`,
       });
 
+      // Save the new option
       const savedOption = await option.save();
 
       // Find the question by ID and push the new option
@@ -44,6 +48,7 @@ export default class QuestionsController {
         { new: true } // Return the updated question
       ).populate('options');
 
+      // Return the updated question and the saved option
       res.status(201).json({ question: updatedQuestion, option: savedOption });
     } catch (error) {
       console.error(error);
@@ -51,6 +56,7 @@ export default class QuestionsController {
     }
   }
 
+  // View all questions with their options
   async viewQuestions(req, res) {
     try {
       const questions = await Question.find().populate('options');
@@ -61,12 +67,14 @@ export default class QuestionsController {
     }
   }
 
+  // Delete a question
   async deleteQuestions(req, res) {
     try {
       const questionId = req.params.id;
 
+      // Delete the question by ID
       await Question.findByIdAndDelete(questionId);
-      res.status(204).send("deleted question");
+      res.status(204).send("Deleted question");
     } catch (error) {
       console.error(error);
       res.status(500).send("Internal Server Error");
