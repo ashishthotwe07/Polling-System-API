@@ -54,7 +54,6 @@ Before setting up the Polling System API, ensure you have the following:
 - `POST /questions/create`: Create a new question.
 - `POST /questions/:id/options/create`: Add options to a question.
 - `GET /questions/:id/`: View details of a question.
-- `GET /questions/`: View all questions.
 - `GET /questions/:id/delete`: Delete a question.
 - `GET /options/:id/delete`: Delete an option.
 - `POST /options/:id/add_vote`: Add a vote to an option.
