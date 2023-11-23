@@ -1,5 +1,4 @@
 
-```
 # Polling System API
 
 The Polling System API is a backend application that allows users to create, manage, and participate in polls. It provides a set of endpoints for creating questions, adding options to questions, viewing questions and their details, deleting questions, and voting on options.
@@ -23,13 +22,13 @@ Before setting up the Polling System API, ensure you have the following:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/polling-system-api.git
+   git clone https://github.com/ashishthotwe07/Polling-System-API.git
    ```
 
 2. **Navigate to the Project Directory:**
 
    ```bash
-   cd polling-system-api
+   cd Polling-System-API
    ```
 
 3. **Install Dependencies:**
@@ -38,18 +37,7 @@ Before setting up the Polling System API, ensure you have the following:
    npm install
    ```
 
-## Configuration
 
-1. **Create a `.env` File:**
-
-   Create a `.env` file in the root of the project:
-
-   ```env
-   PORT=8000
-   MONGODB_URI=mongodb://localhost:27017/polling-system
-   ```
-
-   Adjust the values based on your preferences and MongoDB setup.
 
 ## Usage
 
@@ -86,4 +74,4 @@ Contributions are welcome! Fork the repository, make your changes, and submit a 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
+
