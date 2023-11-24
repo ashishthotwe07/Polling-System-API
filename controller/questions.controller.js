@@ -8,15 +8,25 @@ export default class QuestionsController {
     try {
       const { title } = req.body;
 
+      // Check if 'title' is provided in the request body
+      if (!title) {
+        return res.status(400).json({ error: 'Please enter the question.' });
+      }
+
+      // Create a new question
       const question = new Question({
         title: title,
       });
 
+      // Save the new question
       const savedQuestion = await question.save();
+
+      // Return the saved question
       res.status(201).json(savedQuestion);
     } catch (error) {
       console.error(error);
-      res.status(500).send("Internal Server Error");
+      // Handle internal server error
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
@@ -25,11 +35,17 @@ export default class QuestionsController {
     try {
       const questionId = req.params.id;
 
+      // Check if the question ID is valid
       if (!mongoose.isValidObjectId(questionId)) {
         return res.status(400).json({ error: 'Invalid question ID' });
       }
 
       const { text } = req.body;
+
+      // Check if 'text' is provided in the request body
+      if (!text) {
+        return res.status(400).json({ error: 'Please enter the option text.' });
+      }
 
       // Create a new option
       const option = new Option({
@@ -52,18 +68,28 @@ export default class QuestionsController {
       res.status(201).json({ question: updatedQuestion, option: savedOption });
     } catch (error) {
       console.error(error);
-      res.status(500).send("Internal Server Error");
+      // Handle internal server error
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
   // View all questions with their options
   async viewQuestions(req, res) {
     try {
+      // Retrieve all questions and populate the 'options' field
       const questions = await Question.find().populate('options');
+
+      // Check if there are no questions
+      if (!questions.length) {
+        return res.status(404).json({ error: 'No questions found.' });
+      }
+
+      // Return the questions with options
       res.status(200).json(questions);
     } catch (error) {
       console.error(error);
-      res.status(500).send("Internal Server Error");
+      // Handle internal server error
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
@@ -72,12 +98,25 @@ export default class QuestionsController {
     try {
       const questionId = req.params.id;
 
+      // Check if the question ID is valid
+      if (!mongoose.isValidObjectId(questionId)) {
+        return res.status(400).json({ error: 'Invalid question ID' });
+      }
+
       // Delete the question by ID
-      await Question.findByIdAndDelete(questionId);
+      const deletedQuestion = await Question.findByIdAndDelete(questionId);
+
+      // Check if the question was not found
+      if (!deletedQuestion) {
+        return res.status(404).json({ error: 'Question not found.' });
+      }
+
+      // Return success status
       res.status(204).send("Deleted question");
     } catch (error) {
       console.error(error);
-      res.status(500).send("Internal Server Error");
+      // Handle internal server error
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 }
