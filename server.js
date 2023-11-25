@@ -3,8 +3,12 @@ import bodyParser from 'body-parser';
 import QuestionsRouter from './routes/questions.routes.js'; 
 import OptionsRouter from './routes/options.routes.js'; 
 import { db } from './config/mongoose.js';
+import dotenv from 'dotenv';
+
 
 const app = express();
+
+dotenv.config();
 
 app.use(bodyParser.json());
 
