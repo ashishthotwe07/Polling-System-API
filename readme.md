@@ -42,11 +42,6 @@ Before setting up the Polling System API, ensure you have the following:
 
    Create a `.env` file in the root of your project and add the following:
 
-   ```env
-   MONGODB_URI=mongodb+srv://ashishthotwe:dPmtXOlf0Pe0y4FP@cluster0.rrid8sk.mongodb.net/?retryWrites=true&w=majority
-   ```
-
-   Replace `mongodb+srv://ashishthotwe:dPmtXOlf0Pe0y4FP@cluster0.rrid8sk.mongodb.net/?retryWrites=true&w=majority` with your actual MongoDB connection string.
 
    
 ## Usage
